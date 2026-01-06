@@ -42,7 +42,7 @@ pipeline {
 
         stage('Terraform Plan') {
             steps {
-                bat 'terraform plan'
+                bat 'terraform plan -out=tfplan'
             }
         }
 
@@ -52,7 +52,7 @@ pipeline {
                 ok "Apply"
             }
             steps {
-                bat 'terraform apply -auto-approve'
+                bat 'terraform apply tfplan'
             }
         }
     }
