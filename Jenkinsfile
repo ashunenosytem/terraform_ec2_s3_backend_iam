@@ -1,19 +1,37 @@
 pipeline {
     agent any
+
+    environment {
+        REPO_URL = "https://github.com/ashunenosytem/terraform_ec2_s3_backend_iam.git"
+        BRANCH   = "main"
+    }
+
     stages {
+
+        stage('Clean Workspace') {
+            steps {
+                bat '''
+                if exist .git (
+                  echo Cleaning existing repo
+                  rmdir /s /q .git
+                )
+                '''
+            }
+        }
 
         stage('Clone Repo') {
             steps {
-                git branch: 'main',
-                    url: 'https://github.com/ashunenosytem/terraform_ec2_s3_backend_iam.git'
+                bat '''
+                git clone -b %BRANCH% %REPO_URL% .
+                '''
             }
         }
-        stage('List Workspace') {
-    steps {
-        bat 'dir'
-    }
-}
 
+        stage('Verify Files') {
+            steps {
+                bat 'dir'
+            }
+        }
 
         stage('Terraform Init') {
             steps {
@@ -29,7 +47,7 @@ pipeline {
 
         stage('Terraform Plan') {
             steps {
-                bat 'terraform plan -out=tfplan'
+                bat 'terraform plan'
             }
         }
 
@@ -39,7 +57,7 @@ pipeline {
                 ok "Apply"
             }
             steps {
-                bat 'terraform apply tfplan'
+                bat 'terraform apply -auto-approve'
             }
         }
     }
