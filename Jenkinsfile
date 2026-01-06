@@ -4,6 +4,9 @@ pipeline {
     environment {
         REPO_URL = "https://github.com/ashunenosytem/terraform_ec2_s3_backend_iam.git"
         BRANCH   = "main"
+        AWS_ACCESS_KEY_ID     = credentials('aws-access-key-id')
+  AWS_SECRET_ACCESS_KEY = credentials('aws-secret-access-key')
+  AWS_DEFAULT_REGION    = 'us-east-1'
     }
     
     stages {
