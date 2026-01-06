@@ -8,11 +8,13 @@ pipeline {
     stages {
 
         stage('Checkout') {
-            steps {
-                git branch: 'main',
-                    url: 'https://github.com/ashunenosytem/terraform_ec2_s3_backend_iam.git'
-            }
-        }
+    steps {
+        git branch: 'main',
+            url: 'https://github.com/ORG/REPO.git',
+            credentialsId: 'github-creds'
+    }
+}
+
 
         stage('Terraform Init') {
             steps {
