@@ -1,11 +1,11 @@
 pipeline {
     agent any
-
     stages {
 
-        stage('Checkout') {
+        stage('Clone Repo') {
             steps {
-                checkout scm
+                git branch: 'main',
+                    url: 'https://github.com/ashunenosytem/terraform_ec2_s3_backend_iam.git'
             }
         }
         stage('List Workspace') {
