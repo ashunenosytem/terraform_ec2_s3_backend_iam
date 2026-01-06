@@ -1,0 +1,16 @@
+image: hashicorp/terraform:latest
+
+stages:
+  - init
+  - destroy
+
+init:
+  stage: init
+  script:
+    - terraform init -input=false
+
+destroy:
+  stage: destroy
+  when: manual
+  script:
+    - terraform destroy -auto-approve
