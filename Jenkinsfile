@@ -3,6 +3,18 @@ pipeline {
 
     stages {
 
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
+        stage('List Workspace') {
+    steps {
+        bat 'dir'
+    }
+}
+
+
         stage('Terraform Init') {
             steps {
                 bat 'terraform init'
