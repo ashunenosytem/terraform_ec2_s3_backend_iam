@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        AWS_DEFAULT_REGION = "us-east-1"
+        AWS_DEFAULT_REGION = "ap-south-1"
     }
 
     stages {
@@ -10,7 +10,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 git branch: 'main',
-                    url: 'https://github.com/YOUR_ORG/YOUR_REPO.git'
+                    url: 'https://github.com/ashunenosytem/terraform_ec2_s3_backend_iam.git'
             }
         }
 
